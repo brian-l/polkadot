@@ -29,6 +29,7 @@ to pass additional configuration options at run time, you can pass multiple `--e
 python -m polkadot.dance polkadot.py --extra PATH=$PATH:$HOME/bin --extra FOO=BAR
 ```
 
+see my sample repository for an example of structuring your dotfiles: https://github.com/brian-l/polkadot-simple-sample
 
 ## extending functionality
 

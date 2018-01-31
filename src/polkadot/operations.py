@@ -68,5 +68,10 @@ def mode(dest, octal, config = None):
 @filer
 def gitclone(dest, source, branch = 'master', config = None):
     logger.debug("git clone %s into %s on '%s'" % (source, dest, branch))
-    yield pygit2.clone_repository(source, dest, checkout_branch = branch)
+    try:
+        yield pygit2.clone_repository(source, dest, checkout_branch = branch)
+    except ValueError:
+        logger.info("skipped git clone for existing repository in %s" % (dest))
+        yield None
+
 
