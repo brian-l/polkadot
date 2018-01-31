@@ -1,7 +1,9 @@
 import functools
 import os
 import pygit2
+import requests
 import shutil
+import traceback
 
 from polkadot.globber import glob
 from polkadot.logging import logger, log_operation
@@ -74,4 +76,17 @@ def gitclone(dest, source, branch = 'master', config = None):
         logger.info("skipped git clone for existing repository in %s" % (dest))
         yield None
 
+@filer
+def download(dest, source, config = None):
+    logger.debug("downloading file from %s into %s" % (source, dest))
+    try:
+        request = requests.get(source, stream = True)
+        with open(dest, 'wb') as output:
+            for chunk in request.iter_content(chunk_size = 1024):
+                if chunk:
+                    yield output.write(chunk)
+    except:
+        logger.error('failed to download file')
+        logger.error(traceback.format_exc())
+        yield None
 

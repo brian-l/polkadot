@@ -14,6 +14,6 @@ setup(
     python_requires='>=3.5',
     zip_safe = False,
     install_requires = [
-        'jinja2', 'pygit2',
+        'jinja2', 'pygit2', 'requests',
     ],
 )
