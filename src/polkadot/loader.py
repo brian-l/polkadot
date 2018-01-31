@@ -9,7 +9,7 @@ from polkadot.logging import logger
 
 
 REQUIRED_ATTRIBUTES = {
-    'DOTFILES', 'DOTFILES_GIT_REPOSITORY',
+    'DOTFILES',
 }
 
 
@@ -27,6 +27,7 @@ def load_config(path, dry_run, extras):
     config = {
         'DOTFILES_DRY_RUN': dry_run,
         'DOTFILES_HOME_DIRECTORY': os.getenv('HOME'),
+        'DOTFILES_WORKING_DIRECTORY': os.path.dirname(os.path.abspath(path)),
         'DOTFILES_JINJA_ENV': Environment(
             loader = FileSystemLoader('./'),
         )

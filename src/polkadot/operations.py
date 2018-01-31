@@ -3,6 +3,7 @@ import os
 import pygit2
 import shutil
 
+from polkadot.globber import glob
 from polkadot.logging import logger, log_operation
 
 
@@ -27,15 +28,26 @@ def filer(fn):
 
 @filer
 def copy(dest, source, config = None, template = True):
-    logger.debug("copy %s to %s" % (source, dest))
-    if template:
-        template = config['DOTFILES_JINJA_ENV'].get_template(source)
-        output = template.render(config)
-        with open(dest, 'w') as d:
-            d.write(output)
-        yield shutil.copystat(source, dest)
+    sources = list(glob(source, config['DOTFILES_WORKING_DIRECTORY']))
+
+    if source.endswith('*') and not dest.endswith('*'):
+        logger.error("Globbed sources must be copied to a globbed directory.")
+        return
     else:
-        yield shutil.copy2(source, dest)
+        dest = os.path.dirname(dest)
+
+    for source in sources:
+        realdest = os.path.join(dest, os.path.basename(source))
+        logger.debug("copy %s to %s" % (source, realdest))
+
+        if template:
+            template = config['DOTFILES_JINJA_ENV'].get_template(source)
+            output = template.render(config)
+            with open(realdest, 'w') as d:
+                d.write(output)
+            yield shutil.copystat(source, realdest)
+        else:
+            yield shutil.copy2(source, realdest)
 
 @filer
 def touch(dest, config = None):
