@@ -39,7 +39,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # logging.basicConfig(level = logging.WARNING)
     if args.verbose:
         logger.setLevel(logging.DEBUG)
 

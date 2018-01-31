@@ -14,6 +14,15 @@ REQUIRED_ATTRIBUTES = {
 
 
 def load_config(path, dry_run, extras):
+    """
+    load a source file into a dictionary keeping only names that are uppercase and don't start with _
+
+    provides some default/initial options and handles missing options.
+
+    :param str path: path to the configuration file
+    :param bool dry_run: if True don't make changes
+    :param dict extras: optional extra arguments and options
+    """
     src = SourceFileLoader('polkadot.config', path)
     spec = spec_from_loader('polkadot.config', src)
     mod = module_from_spec(spec)
@@ -45,6 +54,11 @@ def load_config(path, dry_run, extras):
         yield from execute_config({**config, **extras})
 
 def execute_config(config):
+    """
+    run through each generator and evaluate the file changes
+
+    :param dict config: dictionary form of the configuration file combined with extra arguments and options
+    """
     for dotfile in config['DOTFILES']:
         files = iter(dotfile)
         next(files)
