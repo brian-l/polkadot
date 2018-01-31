@@ -13,6 +13,23 @@ polkadot is configured using Python source code (think Django's `settings.py`).
 
 all names in your source code that are uppercase and do not start with an underscore will be added to the template context.
 
+to use the polkadot module from the command line,
+
+```
+python -m polkadot.dance polkadot.py
+```
+
+to run polkadot without making any changes you can use the `--dry-run` option:
+```
+python -m polkadot.dance polkadot.py --dry-run
+```
+
+to pass additional configuration options at run time, you can pass multiple `--extra` options:
+```
+python -m polkadot.dance polkadot.py --extra PATH=$PATH:$HOME/bin --extra FOO=BAR
+```
+
+
 ## extending functionality
 
 polkadot provides a lightweight wrapper around typical system utilities in the `os` and `shutil` modules.
