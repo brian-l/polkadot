@@ -16,17 +16,17 @@ all names in your source code that are uppercase and do not start with an unders
 to use the polkadot module from the command line,
 
 ```
-python -m polkadot.dance polkadot.py
+python -m polkadot.dance dot.py
 ```
 
 to run polkadot without making any changes you can use the `--dry-run` option:
 ```
-python -m polkadot.dance polkadot.py --dry-run
+python -m polkadot.dance dot.py --dry-run
 ```
 
 to pass additional configuration options at run time, you can pass multiple `--extra` options:
 ```
-python -m polkadot.dance polkadot.py --extra PATH=$PATH:$HOME/bin --extra FOO=BAR
+python -m polkadot.dance dot.py --extra PATH=$PATH:$HOME/bin --extra FOO=BAR
 ```
 
 see my sample repository for an example of structuring your dotfiles: https://github.com/brian-l/polkadot-simple-sample
