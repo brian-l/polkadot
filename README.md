@@ -4,7 +4,7 @@ polkadot is a Linux dotfiles manager written in Python. It supports templating t
 
 ## requirements
 
-1. a recent version of libgit2 (>=0.26.0) to provide git2.h to pygit2
+1. a recent version of libgit2 (>=0.26.0) to provide git2.h to pygit2. follow the instructions here for pygit2: http://www.pygit2.org/install.html#quick-install
 2. Python 3.5 or higher for fancy syntax
 
 ## usage
