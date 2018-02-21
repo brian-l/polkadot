@@ -4,10 +4,11 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'polkadot',
-    version = '1.0',
+    version = '1.0.0',
     description = 'Python dotfiles manager',
+    url = 'https://github.com/brian-l/polkadot',
     author = 'Brian Lee',
-    author_email = 'brian-l@users.noreply.github.com>',
+    author_email = 'brian-l@users.noreply.github.com',
     license = 'MIT',
     packages = find_packages('src'),
     package_dir = {'': 'src'},
