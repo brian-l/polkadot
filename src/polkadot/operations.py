@@ -1,9 +1,11 @@
 import functools
 import os
-import pygit2
 import requests
 import shutil
 import traceback
+
+from git import Repo
+from git.exc import GitCommandError
 
 from polkadot.globber import glob
 from polkadot.logging import logger, log_operation
@@ -128,8 +130,9 @@ def gitclone(dest, source, branch = 'master', config = None):
     """
     logger.debug("git clone %s into %s on '%s'" % (source, dest, branch))
     try:
-        yield pygit2.clone_repository(source, dest, checkout_branch = branch)
-    except ValueError:
+        yield Repo().clone_from(source, dest, branch = branch, quiet = True)
+    except GitCommandError:
+        logger.debug(traceback.format_exc())
         logger.info("skipped git clone for existing repository in %s" % (dest))
         yield None
 
