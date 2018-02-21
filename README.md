@@ -1,11 +1,12 @@
 # polkadot
 
-polkadot is a Linux dotfiles manager written in Python. It supports templating through Jinja2 and uses Git for source control.
+polkadot is a Linux dotfiles manager written in Python. It supports templating through Jinja2 and uses Git for source control. Python 3.5 or higher is required for fancy syntax.
 
-## requirements
+you can get it with:
 
-1. a recent version of libgit2 (>=0.26.0) to provide git2.h to pygit2. follow the instructions here for pygit2: http://www.pygit2.org/install.html#quick-install
-2. Python 3.5 or higher for fancy syntax
+```
+pip install polkadot
+```
 
 ## usage
 
