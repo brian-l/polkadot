@@ -117,7 +117,7 @@ def mode(dest, octal, config = None):
     yield os.chmod(dest, octal)
 
 @filer
-def gitclone(dest, source, branch = 'master', config = None):
+def gitclone(dest, source, branch = 'master', config = None, git_kwargs = None):
     """
     clone a git repository
 
@@ -130,7 +130,11 @@ def gitclone(dest, source, branch = 'master', config = None):
     """
     logger.debug("git clone %s into %s on '%s'" % (source, dest, branch))
     try:
-        yield Repo().clone_from(source, dest, branch = branch, quiet = True)
+        yield Repo().clone_from(
+            source, dest,
+            branch = branch,
+            **(git_kwargs or {})
+        )
     except GitCommandError:
         logger.debug(traceback.format_exc())
         logger.info("skipped git clone for existing repository in %s" % (dest))
