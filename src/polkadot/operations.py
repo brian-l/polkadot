@@ -68,8 +68,10 @@ def copy(dest, source, config = None, template = True):
     else:
         dest = os.path.dirname(dest)
 
+    prefix = len(source.split(os.path.sep)) - 1
+
     for source in sources:
-        realdest = os.path.join(dest, os.path.basename(source))
+        realdest = os.path.join(dest, *(source.split(os.path.sep)[prefix:]))
         logger.debug("copy %s to %s" % (source, realdest))
 
         if template:
