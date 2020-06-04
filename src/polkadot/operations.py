@@ -75,9 +75,15 @@ def copy(dest, source, config = None, template = True):
         logger.debug("copy %s to %s" % (source, realdest))
 
         if template:
-            template = config['DOTFILES_JINJA_ENV'].get_template(source)
-            output = template.render(config)
-            with open(realdest, 'w') as d:
+            try:
+                template = config['DOTFILES_JINJA_ENV'].get_template(source)
+                output = template.render(config).encode('utf-8')
+            except UnicodeDecodeError:
+                logger.warning("couldn't template non-text file: %s" % (source))
+                with open(source, 'rb') as binary_source:
+                    output = binary_source.read()
+
+            with open(realdest, 'wb') as d:
                 d.write(output)
             yield shutil.copystat(source, realdest)
         else:
