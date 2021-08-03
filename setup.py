@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'polkadot',
-    version = '1.0.2',
+    version = '1.0.3',
     description = 'Python dotfiles manager',
     url = 'https://github.com/brian-l/polkadot',
     author = 'Brian Lee',

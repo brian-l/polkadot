@@ -39,7 +39,7 @@ def filer(fn):
                 yield from dep
 
         if not path.startswith('/'):
-            path = os.path.join(config['DOTFILES_HOME_DIRECTORY'], path)
+            path = os.path.join(config['DOTFILES_OUTPUT_DIRECTORY'], path)
 
         if config['DOTFILES_DRY_RUN']:
             yield log_operation(fn, path, args, kwargs)
